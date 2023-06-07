@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Vérification d'adresse e-mail</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: brown;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    .email-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .valid {
+      color: green;
+    }
+
+    .invalid {
+      color: red;
+    }
+
+    @media screen and (max-width: 500px) {
+      .container {
+        max-width: 100%;
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Vérification d'adresse e-mail</h1>
+    <div class="form-group">
+      <label for="emailInput">Adresse e-mail :</label>
+      <input type="text" class="email-input" id="emailInput" placeholder="Entrez votre adresse e-mail" onkeyup="validateEmail()">
+    </div>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function validateEmail() {
+      var emailInput = document.getElementById('emailInput');
+      var email = emailInput.value.trim();
+      var result = document.getElementById('result');
+
+      if (email === '') {
+        result.innerHTML = '';
+        return;
+      }
+
+      if (email.includes('@')) {
+        var atIndex = email.indexOf('@');
+        var domain = email.slice(atIndex + 1);
+        if (domain.includes('.')) {
+          var dotIndex = domain.lastIndexOf('.');
+          if (dotIndex > 0 && dotIndex < domain.length - 1) {
+            result.innerHTML = 'Adresse e-mail valide';
+            result.classList.remove('invalid');
+            result.classList.add('valid');
+            return;
+          }
+        }
+      }
+
+      result.innerHTML = 'Adresse e-mail invalide';
+      result.classList.remove('valid');
+      result.classList.add('invalid');
+    }
+  </script>
+</body>
+</html>
